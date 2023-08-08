@@ -60,7 +60,7 @@ dependencies {
 
     //ktx -> viewModel delegation
     implementation "androidx.activity:activity-ktx:1.7.2"
-    implementation "androidx.fragment:fragment-ktx:1.6.0"
+    implementation "androidx.fragment:fragment-ktx:1.6.1"
 
     //lifecycle -> convert flow to live data
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.6.1"
@@ -75,7 +75,9 @@ dependencies {
     //google services - GMaps purpose
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
 
-
+    //mocking
+    testImplementation "org.mockito:mockito-core:5.3.1"
+    androidTestImplementation 'org.mockito:mockito-android:2.24.5'
 
 }
 
