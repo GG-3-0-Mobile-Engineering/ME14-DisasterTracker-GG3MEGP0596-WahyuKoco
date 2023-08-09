@@ -16,7 +16,7 @@ class ReportDisasterUseCaseImpl @Inject constructor(
         provinceName: String?,
         disasterType: String?
     ): Flow<Async<List<Reports>>> {
-        return repository.getReportList(provinceName, disasterType)
+        return repository.getReportList(provinceName?.trim(), disasterType)
     }
 
     override fun showFloodDangerNotification(floodDepth: Int) {
