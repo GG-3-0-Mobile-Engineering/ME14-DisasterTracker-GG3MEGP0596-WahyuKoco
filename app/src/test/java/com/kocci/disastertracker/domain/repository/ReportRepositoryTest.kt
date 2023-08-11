@@ -45,24 +45,22 @@ class ReportRepositoryTest {
     }
 
     @Test
-    fun `repository should map data to domain logic`() = runTest {
-        repo.getReportList(null, null).collect()
-        Mockito.verify(apiService).getCrowdSourcingReport(null, null)
-        Mockito.verify(reportMapper).convertReportApiResponseToDomain(ReportsApiResponse())
+    fun `getReportList, if province args empty, should call api with null arguments`() = runTest {
+        repo.getReportList("", null).collect()
+        Mockito.verify(preference).getReportPeriod()
+        Mockito.verify(apiService).getCrowdSourcingReport(
+            provinceCode = null,
+            null
+        )
     }
 
-    @Test
-    fun `if the province is empty string, call api with null province argument instead`() = runTest{
-        repo.getReportList("", null).collect()
-        Mockito.verify(apiService).getCrowdSourcingReport(null, null)
-    }
 
     /**
      * Test emitted values here
      */
 
     @Test
-    fun `em`(){
+    fun something() {
 
     }
 }

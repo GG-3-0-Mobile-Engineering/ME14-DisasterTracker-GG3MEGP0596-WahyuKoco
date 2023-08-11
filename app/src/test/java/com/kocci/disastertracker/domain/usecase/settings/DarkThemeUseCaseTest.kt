@@ -9,9 +9,9 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.junit.MockitoJUnitRunner
 
+//Probably will be changed (settings should not have usecase?
 @RunWith(MockitoJUnitRunner::class)
 class DarkThemeUseCaseTest {
-
 
     @Mock
     private lateinit var preferenceManager: PreferenceManager
@@ -23,17 +23,18 @@ class DarkThemeUseCaseTest {
         useCase = DarkThemeUseCaseImpl(preferenceManager)
     }
 
-    @Test
-    fun `use case should change dark theme preference to true or false when enabled or disabled`() {
-        useCase.enableDarkTheme()
-        Mockito.verify(preferenceManager).setDarkThemePreference(true)
+//    @Test
+//    fun `use case should change dark theme preference to true or false when enabled or disabled`() {
+//        useCase.enableDarkTheme()
+//        Mockito.verify(preferenceManager).setDarkThemePreference(true)
+//
+//        useCase.disableDarkTheme()
+//        Mockito.verify(preferenceManager).setDarkThemePreference(false)
+//    } should test preference manager instead
+    // also settings should not be a use case
 
-        useCase.disableDarkTheme()
-        Mockito.verify(preferenceManager).setDarkThemePreference(false)
-    }
-
     @Test
-    fun `use case should inform about current dark theme preferences`(){
+    fun `use case should inform about current dark theme preferences`() {
         Mockito.`when`(preferenceManager.getDarkThemePreference()).thenReturn(true)
 
         val isDarkThemeEnabled = useCase.isDarkThemeEnabled()

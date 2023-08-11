@@ -7,6 +7,8 @@ import javax.inject.Inject
 class DarkThemeUseCaseImpl @Inject constructor(
     private val preference: PreferenceManager,
 ) : DarkThemeUseCase {
+
+
     override fun shouldEnableDarkTheme() {
         val isDarkThemeEnabled = preference.getDarkThemePreference()
         if (isDarkThemeEnabled) {

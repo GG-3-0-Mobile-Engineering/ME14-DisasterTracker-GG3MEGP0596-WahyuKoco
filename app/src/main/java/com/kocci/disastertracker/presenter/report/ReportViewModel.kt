@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ReportViewModel @Inject constructor(
-    private val useCase: ReportDisasterUseCase
+    private val useCase: ReportDisasterUseCase,
 ) : ViewModel() {
 
     val availableProvince = useCase.getAvailableProvince()

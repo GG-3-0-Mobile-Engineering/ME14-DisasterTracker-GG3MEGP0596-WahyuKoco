@@ -15,19 +15,21 @@ object ProvinceHelper {
         return provinceList
     }
 
+    //test
     fun getProvinceCode(provinceName: String): String {
         return deserializeToEnums(provinceName).codes
     }
 
-    fun convertToHumanReadableName(province: AvailableProvince): String {
+    private fun convertToHumanReadableName(province: AvailableProvince): String {
         return province.name.lowercase().replace("_", " ")
     }
 
-    fun capitalizeProvinceName(provinceName: String): String {
+    private fun capitalizeProvinceName(provinceName: String): String {
         return provinceName.split(" ").joinToString(" ") { it.replaceFirstChar { it.uppercase() } }
     }
 
-    fun deserializeToEnums(provinceName: String): AvailableProvince {
+
+    private fun deserializeToEnums(provinceName: String): AvailableProvince {
         val name = provinceName.uppercase().replace(" ", "_")
         try {
             return AvailableProvince.valueOf(name)

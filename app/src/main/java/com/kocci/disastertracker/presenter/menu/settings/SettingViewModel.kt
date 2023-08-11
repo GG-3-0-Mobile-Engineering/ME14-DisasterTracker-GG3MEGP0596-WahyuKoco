@@ -9,7 +9,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SettingViewModel @Inject constructor(
     private val useCase: DarkThemeUseCase,
-    private val timePeriodUseCase: ReportTimePeriodUseCase
+    private val timePeriodUseCase: ReportTimePeriodUseCase,
 ) : ViewModel() {
 
     val userTimePreference = timePeriodUseCase.showTimePeriod()

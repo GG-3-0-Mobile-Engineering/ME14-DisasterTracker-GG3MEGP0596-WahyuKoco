@@ -5,8 +5,10 @@ import org.junit.Assert
 import org.junit.Test
 
 class ProvinceHelperTest {
+    //test name should have a pattern -> important
+    //business logic should be tested by behaviour
     @Test
-    fun `if the province not found, should throw ProvinceNotFound Exception`() {
+    fun `getProvinceCode, if not found, should throw ProvinceNotFound Exception`() {
         Assert.assertThrows(ProvinceNotFoundException::class.java) {
             ProvinceHelper.getProvinceCode(
                 "Filipino"
@@ -15,14 +17,12 @@ class ProvinceHelperTest {
     }
 
     @Test
-    fun `provided province should be human readable`() {
+    fun `getAvailableProvince, when invoked, should return a list of uppercase strings`() {
         val provinceList = ProvinceHelper.getAvailableProvince()
         val provinceName = provinceList.findLast { it.contains(" ") } ?: provinceList[0]
-//        val provinceName = "JAKARTA"
-
 
         if (provinceName.contains(" ")) { //Sumatera Utara, Bangka Belitung, dkk
-            provinceName.split(" ").map { name ->
+            provinceName.split(" ").forEach { name ->
                 val expected = name.replaceFirstChar { it.uppercase() }
                 Assert.assertEquals(name, expected)
             }
@@ -30,11 +30,14 @@ class ProvinceHelperTest {
             val expected = provinceName.replaceFirstChar { it.uppercase() }
             Assert.assertEquals(provinceName, expected)
         }
-
-        if (provinceName.contains("_")) {
-            //I want to assert if name does not contain "_" but i can't find a proper solution
-            Assert.assertTrue(false)
-        }
-
     }
+
+    @Test
+    fun `getAvailableProvince, when invoked, should not contain _`() {
+        val provinceList = ProvinceHelper.getAvailableProvince()
+        val provinceName = provinceList.findLast { it.contains(" ") } ?: provinceList[0]
+        Assert.assertEquals(provinceName.contains("_"), false)
+    }
+
+
 }
