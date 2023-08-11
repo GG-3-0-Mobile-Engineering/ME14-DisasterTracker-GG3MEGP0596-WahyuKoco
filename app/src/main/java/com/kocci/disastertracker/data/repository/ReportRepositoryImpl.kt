@@ -1,6 +1,6 @@
 package com.kocci.disastertracker.data.repository
 
-import com.kocci.disastertracker.data.source.local.preferences.PreferenceManager
+import com.kocci.disastertracker.data.source.local.preferences.SettingPreferences
 import com.kocci.disastertracker.data.source.remote.service.ApiService
 import com.kocci.disastertracker.domain.model.Reports
 import com.kocci.disastertracker.domain.reactive.Async
@@ -13,13 +13,14 @@ import com.kocci.disastertracker.util.mapper.ReportsMapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
 class ReportRepositoryImpl @Inject constructor(
     private val apiService: ApiService,
-    private val prefManager: PreferenceManager,
+    private val settingPreferences: SettingPreferences,
     private val reportsMapper: ReportsMapper
 ) : ReportRepository {
 
@@ -31,7 +32,7 @@ class ReportRepositoryImpl @Inject constructor(
             emit(Async.Loading)
             delay(500L) //just to show if loading exist.. remove later
             var provinceCode: String? = null
-            val timePeriod = prefManager.getReportPeriod().periodInSec
+            val timePeriod = settingPreferences.reportPeriodPreference.first()
 
             provinceName?.let {
                 if (it.isEmpty()) {

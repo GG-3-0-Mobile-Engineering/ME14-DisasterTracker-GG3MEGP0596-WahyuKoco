@@ -1,8 +1,7 @@
 package com.kocci.disastertracker.domain.repository
 
-import com.kocci.disastertracker.data.enums.AvailableReportPeriod
 import com.kocci.disastertracker.data.repository.ReportRepositoryImpl
-import com.kocci.disastertracker.data.source.local.preferences.PreferenceManager
+import com.kocci.disastertracker.data.source.local.preferences.SettingPreferences
 import com.kocci.disastertracker.data.source.remote.response.ReportsApiResponse
 import com.kocci.disastertracker.data.source.remote.service.ApiService
 import com.kocci.disastertracker.util.mapper.ReportsMapper
@@ -25,23 +24,28 @@ class ReportRepositoryTest {
     private lateinit var apiService: ApiService
 
     @Mock
-    private lateinit var preference: PreferenceManager
+    private lateinit var preference: SettingPreferences
 
     @Mock
     private lateinit var reportMapper: ReportsMapper
 
     private lateinit var repo: ReportRepository
 
+    /**
+     * Test is currently error because i changed the preferences from static to reactive.
+     * Root problem is in : when i mock the flow preference.
+     * Holy cow. Maybe i have a bad design?
+     */
+
     @Before
     fun setup() = runTest {
         repo = ReportRepositoryImpl(apiService, preference, reportMapper)
         val dummyData = Mockito.mock(ReportsApiResponse::class.java)
-
         Mockito.`when`(apiService.getCrowdSourcingReport(null, null))
             .thenReturn(Response.success(dummyData))
 
-        Mockito.`when`(preference.getReportPeriod())
-            .thenReturn(AvailableReportPeriod.ONE_WEEK)
+//        Mockito.`when`(preference.reportPeriodPreference.first())
+//            .thenReturn(SettingPreferences.DEFAULT_TIME_PERIOD) //here is the problem that makes all my test broken
     }
 
     @Test
@@ -52,17 +56,14 @@ class ReportRepositoryTest {
     }
 
     @Test
-    fun `if the province is empty string, call api with null province argument instead`() = runTest{
-        repo.getReportList("", null).collect()
-        Mockito.verify(apiService).getCrowdSourcingReport(null, null)
-    }
+    fun `if the province is empty string, call api with null province argument instead`() =
+        runTest {
+            repo.getReportList("", null).collect()
+            Mockito.verify(apiService).getCrowdSourcingReport(null, null)
+        }
 
     /**
      * Test emitted values here
      */
 
-    @Test
-    fun `em`(){
-
-    }
 }

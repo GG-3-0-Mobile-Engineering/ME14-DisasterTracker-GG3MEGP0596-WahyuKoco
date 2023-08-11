@@ -49,7 +49,7 @@ class MenuFragment : Fragment() {
         val adapter = SimpleAdapter(context, list, R.layout.item_menu, from, to)
         binding.listViewMenu.adapter = adapter
 
-        binding.listViewMenu.setOnItemClickListener { parent, view, position, id ->
+        binding.listViewMenu.setOnItemClickListener { _, _, position, _ ->
             when (menuName[position]) {
                 "Settings" -> {
                     val direction = MenuFragmentDirections.actionMenuFragmentToSettingFragment()

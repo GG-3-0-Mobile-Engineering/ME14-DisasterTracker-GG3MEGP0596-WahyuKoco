@@ -54,7 +54,7 @@ class ReportFragment : Fragment(), OnMapReadyCallback {
             viewModel.callApi(provinceName, disasterType)
         }
 
-        binding.acTvSearchReport.setOnEditorActionListener { v, actionId, event ->
+        binding.acTvSearchReport.setOnEditorActionListener { v, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_NULL) {
                 val text = binding.acTvSearchReport.text.toString()
                 val keyboard = requireActivity().getSystemService(InputMethodManager::class.java)
@@ -109,7 +109,7 @@ class ReportFragment : Fragment(), OnMapReadyCallback {
     private fun setupFilter() {
         binding.rgReport.apply {
             check(binding.rbReportAll.id) //flood is the the first check
-            setOnCheckedChangeListener { group, checkedId ->
+            setOnCheckedChangeListener { _, checkedId ->
                 val radioButton = findViewById<RadioButton>(checkedId)
                 val selectedText = radioButton.text.toString()
                 disasterType = selectedText.lowercase()
