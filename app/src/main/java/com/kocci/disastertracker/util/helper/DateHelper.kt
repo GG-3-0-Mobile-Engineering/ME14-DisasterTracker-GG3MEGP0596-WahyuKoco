@@ -1,6 +1,7 @@
 package com.kocci.disastertracker.util.helper
 
 import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
 
 object DateHelper {
@@ -10,7 +11,7 @@ object DateHelper {
 
     fun beautifyDate(rawDate: String): String {
         val apiFormat = SimpleDateFormat(API_DATE_FORMAT, Locale.getDefault())
-        val date = apiFormat.parse(rawDate)
+        val date = apiFormat.parse(rawDate) as Date
         val newFormat = SimpleDateFormat(SHOW_DATE_FORMAT, Locale.getDefault())
 
         return newFormat.format(date)
