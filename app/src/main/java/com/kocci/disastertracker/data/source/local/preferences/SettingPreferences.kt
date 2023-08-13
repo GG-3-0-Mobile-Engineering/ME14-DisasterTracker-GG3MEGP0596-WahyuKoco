@@ -5,6 +5,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
+import com.kocci.disastertracker.data.enums.AvailableReportPeriod
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -38,6 +39,6 @@ class SettingPreferences @Inject constructor(
     }
 
     companion object {
-        const val DEFAULT_TIME_PERIOD: Int = 604800
+        val DEFAULT_TIME_PERIOD: Int = AvailableReportPeriod.ONE_WEEK.periodInSec
     }
 }

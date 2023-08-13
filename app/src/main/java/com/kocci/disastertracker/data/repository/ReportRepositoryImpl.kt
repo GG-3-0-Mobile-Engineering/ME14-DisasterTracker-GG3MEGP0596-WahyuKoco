@@ -59,10 +59,8 @@ class ReportRepositoryImpl @Inject constructor(
             emit(Async.Error(e.message.toString()))
         } catch (e: NonsenseException) {
             emit(Async.Error("Unexpected Error. ${e.message}"))
-//            MyLogger.e("NonsenseException : ${e.message}")
         } catch (e: Exception) {
             emit(Async.Error("Error. ${e.message}"))
-//            MyLogger.e("Exception : ${e.message}")
         }
     }.flowOn(Dispatchers.IO)
 }

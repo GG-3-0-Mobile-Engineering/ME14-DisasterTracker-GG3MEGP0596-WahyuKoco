@@ -14,9 +14,10 @@ class GetDisasterReportUseCaseImpl @Inject constructor(
 ) : GetDisasterReportUseCase {
     override fun invoke(provinceName: String?, disasterType: String?): Flow<Async<List<Reports>>> {
         return flow {
-            val provinceCode = if (!provinceName.isNullOrEmpty()) {
+            val trimmedProvinceName = provinceName?.trim()
+            val provinceCode = if (!trimmedProvinceName.isNullOrEmpty()) {
                 try {
-                    ProvinceHelper.getProvinceCode(provinceName)
+                    ProvinceHelper.getProvinceCode(trimmedProvinceName)
                 } catch (e: Exception) {
                     emit(Async.Error("Error getting province code: ${e.message}"))
                     return@flow

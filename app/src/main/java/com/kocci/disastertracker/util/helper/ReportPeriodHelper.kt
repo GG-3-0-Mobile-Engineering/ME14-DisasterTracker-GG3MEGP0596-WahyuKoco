@@ -3,7 +3,7 @@ package com.kocci.disastertracker.util.helper
 import com.kocci.disastertracker.data.enums.AvailableReportPeriod
 
 
-object TimePeriodHelper {
+object ReportPeriodHelper {
     object Show {
         // object that we will be presented to user
         const val ONE_WEEK = "Last Week"

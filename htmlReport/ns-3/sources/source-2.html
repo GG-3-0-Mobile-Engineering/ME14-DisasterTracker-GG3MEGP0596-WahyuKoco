@@ -1,0 +1,123 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > ReportRepositoryImpl_Factory</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.kocci.disastertracker.data.repository</a>
+</div>
+
+<h1>Coverage Summary for Class: ReportRepositoryImpl_Factory (com.kocci.disastertracker.data.repository)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">ReportRepositoryImpl_Factory</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.kocci.disastertracker.data.repository;
+&nbsp;
+&nbsp;import com.kocci.disastertracker.data.source.local.preferences.SettingPreferences;
+&nbsp;import com.kocci.disastertracker.data.source.remote.service.ApiService;
+&nbsp;import com.kocci.disastertracker.util.mapper.ReportsMapper;
+&nbsp;import dagger.internal.DaggerGenerated;
+&nbsp;import dagger.internal.Factory;
+&nbsp;import dagger.internal.QualifierMetadata;
+&nbsp;import dagger.internal.ScopeMetadata;
+&nbsp;import javax.annotation.processing.Generated;
+&nbsp;import javax.inject.Provider;
+&nbsp;
+&nbsp;@ScopeMetadata
+&nbsp;@QualifierMetadata
+&nbsp;@DaggerGenerated
+&nbsp;@Generated(
+&nbsp;    value = &quot;dagger.internal.codegen.ComponentProcessor&quot;,
+&nbsp;    comments = &quot;https://dagger.dev&quot;
+&nbsp;)
+&nbsp;@SuppressWarnings({
+&nbsp;    &quot;unchecked&quot;,
+&nbsp;    &quot;rawtypes&quot;,
+&nbsp;    &quot;KotlinInternal&quot;,
+&nbsp;    &quot;KotlinInternalInJava&quot;
+&nbsp;})
+&nbsp;public final class ReportRepositoryImpl_Factory implements Factory&lt;ReportRepositoryImpl&gt; {
+&nbsp;  private final Provider&lt;ApiService&gt; apiServiceProvider;
+&nbsp;
+&nbsp;  private final Provider&lt;SettingPreferences&gt; settingPreferencesProvider;
+&nbsp;
+&nbsp;  private final Provider&lt;ReportsMapper&gt; reportsMapperProvider;
+&nbsp;
+&nbsp;  public ReportRepositoryImpl_Factory(Provider&lt;ApiService&gt; apiServiceProvider,
+&nbsp;      Provider&lt;SettingPreferences&gt; settingPreferencesProvider,
+&nbsp;      Provider&lt;ReportsMapper&gt; reportsMapperProvider) {
+&nbsp;    this.apiServiceProvider = apiServiceProvider;
+&nbsp;    this.settingPreferencesProvider = settingPreferencesProvider;
+&nbsp;    this.reportsMapperProvider = reportsMapperProvider;
+&nbsp;  }
+&nbsp;
+&nbsp;  @Override
+&nbsp;  public ReportRepositoryImpl get() {
+&nbsp;    return newInstance(apiServiceProvider.get(), settingPreferencesProvider.get(), reportsMapperProvider.get());
+&nbsp;  }
+&nbsp;
+&nbsp;  public static ReportRepositoryImpl_Factory create(Provider&lt;ApiService&gt; apiServiceProvider,
+&nbsp;      Provider&lt;SettingPreferences&gt; settingPreferencesProvider,
+&nbsp;      Provider&lt;ReportsMapper&gt; reportsMapperProvider) {
+&nbsp;    return new ReportRepositoryImpl_Factory(apiServiceProvider, settingPreferencesProvider, reportsMapperProvider);
+&nbsp;  }
+&nbsp;
+&nbsp;  public static ReportRepositoryImpl newInstance(ApiService apiService,
+&nbsp;      SettingPreferences settingPreferences, ReportsMapper reportsMapper) {
+&nbsp;    return new ReportRepositoryImpl(apiService, settingPreferences, reportsMapper);
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-08-13 21:14</div>
+</div>
+</body>
+</html>
