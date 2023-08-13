@@ -17,7 +17,7 @@ object ProvinceHelper {
 
     //test
     fun getProvinceCode(provinceName: String): String {
-        return deserializeToEnums(provinceName).codes
+        return deserializeToEnums(provinceName.trim()).codes
     }
 
     private fun convertToHumanReadableName(province: AvailableProvince): String {

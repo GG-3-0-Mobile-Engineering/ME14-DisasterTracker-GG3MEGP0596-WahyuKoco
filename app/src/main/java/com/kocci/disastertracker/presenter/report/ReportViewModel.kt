@@ -6,17 +6,20 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kocci.disastertracker.domain.model.Reports
 import com.kocci.disastertracker.domain.reactive.Async
-import com.kocci.disastertracker.domain.usecase.ReportDisasterUseCase
+import com.kocci.disastertracker.domain.usecase.report.GetDisasterReportUseCase
+import com.kocci.disastertracker.util.helper.NotificationHelper
+import com.kocci.disastertracker.util.helper.ProvinceHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ReportViewModel @Inject constructor(
-    private val useCase: ReportDisasterUseCase,
+    private val getDisasterReportUseCase: GetDisasterReportUseCase,
+    private val notificationHelper: NotificationHelper
 ) : ViewModel() {
 
-    val availableProvince = useCase.getAvailableProvince()
+    fun getAvailableProvince() = ProvinceHelper.getAvailableProvince()
 
     /**
      * We use this because i need to listen reports in 2 different ways.
@@ -35,14 +38,14 @@ class ReportViewModel @Inject constructor(
 
     fun callApi(provinceName: String?, disasterType: String? = null) {
         viewModelScope.launch {
-            useCase.getAllReportData(provinceName, disasterType).collect {
+            getDisasterReportUseCase(provinceName, disasterType).collect {
                 _reports.value = it
             }
         }
     }
 
     fun showNotificationForFlood(depth: Int) {
-        useCase.showFloodDangerNotification(depth)
+        notificationHelper.showFloodDangerNotification(depth)
     }
 
 }
