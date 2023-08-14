@@ -173,7 +173,7 @@ class ReportFragment : Fragment(), OnMapReadyCallback {
         val searchAdapter = ArrayAdapter(
             requireActivity(),
             android.R.layout.simple_dropdown_item_1line,
-            viewModel.availableProvince
+            viewModel.getAvailableProvince()
         )
         binding.acTvSearchReport.setAdapter(searchAdapter)
     }

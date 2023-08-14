@@ -1,0 +1,95 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > PreferenceModuleKt</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.kocci.disastertracker.di</a>
+</div>
+
+<h1>Coverage Summary for Class: PreferenceModuleKt (com.kocci.disastertracker.di)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">PreferenceModuleKt</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.kocci.disastertracker.di
+&nbsp;
+&nbsp;import android.content.Context
+&nbsp;import androidx.datastore.core.DataStore
+&nbsp;import androidx.datastore.preferences.core.PreferenceDataStoreFactory
+&nbsp;import androidx.datastore.preferences.core.Preferences
+&nbsp;import androidx.datastore.preferences.preferencesDataStoreFile
+&nbsp;import dagger.Module
+&nbsp;import dagger.Provides
+&nbsp;import dagger.hilt.InstallIn
+&nbsp;import dagger.hilt.android.qualifiers.ApplicationContext
+&nbsp;import dagger.hilt.components.SingletonComponent
+&nbsp;import javax.inject.Singleton
+&nbsp;
+&nbsp;private const val USER_PREFERENCES = &quot;user_preferences&quot;
+&nbsp;
+&nbsp;@Module
+&nbsp;@InstallIn(SingletonComponent::class)
+&nbsp;class PreferenceModule {
+&nbsp;
+&nbsp;    @Singleton
+&nbsp;    @Provides
+&nbsp;    fun provideDataStore(@ApplicationContext appContext: Context): DataStore&lt;Preferences&gt; {
+&nbsp;        return PreferenceDataStoreFactory.create {
+&nbsp;            appContext.preferencesDataStoreFile(USER_PREFERENCES)
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-08-14 13:44</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,166 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > ReportListAdapter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.kocci.disastertracker.presenter.report</a>
+</div>
+
+<h1>Coverage Summary for Class: ReportListAdapter (com.kocci.disastertracker.presenter.report)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ReportListAdapter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ReportListAdapter$ViewHolder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.kocci.disastertracker.presenter.report
+&nbsp;
+&nbsp;import android.view.LayoutInflater
+&nbsp;import android.view.ViewGroup
+&nbsp;import androidx.recyclerview.widget.RecyclerView
+&nbsp;import com.bumptech.glide.Glide
+&nbsp;import com.kocci.disastertracker.databinding.ItemReportCardBinding
+&nbsp;import com.kocci.disastertracker.domain.model.Reports
+&nbsp;
+&nbsp;class ReportListAdapter(
+<b class="nc">&nbsp;    private val data: List&lt;Reports&gt;</b>
+<b class="nc">&nbsp;) : RecyclerView.Adapter&lt;ReportListAdapter.ViewHolder&gt;() {</b>
+<b class="nc">&nbsp;    inner class ViewHolder(private val binding: ItemReportCardBinding) :</b>
+<b class="nc">&nbsp;        RecyclerView.ViewHolder(binding.root) {</b>
+&nbsp;        fun bind(data: Reports) {
+<b class="nc">&nbsp;            binding.tvReportTitle.text = data.title</b>
+<b class="nc">&nbsp;            binding.tvReportBody.text = data.body</b>
+<b class="nc">&nbsp;            binding.tvReportDate.text = data.date</b>
+&nbsp;
+<b class="nc">&nbsp;            Glide.with(binding.root).load(data.imgUrl).into(binding.imgReport)</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+<b class="nc">&nbsp;        val inflater = LayoutInflater.from(parent.context)</b>
+<b class="nc">&nbsp;        val binding = ItemReportCardBinding.inflate(inflater, parent, false)</b>
+<b class="nc">&nbsp;        return ViewHolder(binding)</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+<b class="nc">&nbsp;        holder.bind(data[position]) // data</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    override fun getItemCount(): Int {
+<b class="nc">&nbsp;        return data.size</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-08-14 13:44</div>
+</div>
+</body>
+</html>

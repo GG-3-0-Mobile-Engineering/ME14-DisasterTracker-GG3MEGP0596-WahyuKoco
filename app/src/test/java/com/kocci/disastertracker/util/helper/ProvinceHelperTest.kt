@@ -1,5 +1,6 @@
 package com.kocci.disastertracker.util.helper
 
+import com.kocci.disastertracker.data.enums.AvailableProvince
 import com.kocci.disastertracker.util.exception.ProvinceNotFoundException
 import org.junit.Assert
 import org.junit.Test
@@ -15,6 +16,15 @@ class ProvinceHelperTest {
             )
         }
     }
+
+    @Test
+    fun `getAvailableProvince, should have the same size as the enum size`() {
+        val actualSize = ProvinceHelper.getAvailableProvince().size
+        val expectedSize = AvailableProvince.values().size
+
+        Assert.assertEquals(actualSize, expectedSize)
+    }
+
 
     @Test
     fun `getAvailableProvince, when invoked, should return a list of uppercase strings`() {

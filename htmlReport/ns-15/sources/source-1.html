@@ -1,0 +1,247 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > ReportsMapper</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.kocci.disastertracker.util.mapper</a>
+</div>
+
+<h1>Coverage Summary for Class: ReportsMapper (com.kocci.disastertracker.util.mapper)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ReportsMapper</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/88)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.kocci.disastertracker.util.mapper
+&nbsp;
+&nbsp;import com.kocci.disastertracker.data.source.remote.response.EarthquakeReportData
+&nbsp;import com.kocci.disastertracker.data.source.remote.response.FireReportData
+&nbsp;import com.kocci.disastertracker.data.source.remote.response.FloodReportData
+&nbsp;import com.kocci.disastertracker.data.source.remote.response.HazeReportData
+&nbsp;import com.kocci.disastertracker.data.source.remote.response.ReportsApiResponse
+&nbsp;import com.kocci.disastertracker.data.source.remote.response.VolcanoReportData
+&nbsp;import com.kocci.disastertracker.data.source.remote.response.WindReportData
+&nbsp;import com.kocci.disastertracker.domain.model.Coordinates
+&nbsp;import com.kocci.disastertracker.domain.model.reports.EarthquakeReports
+&nbsp;import com.kocci.disastertracker.domain.model.reports.FireReports
+&nbsp;import com.kocci.disastertracker.domain.model.reports.FloodReport
+&nbsp;import com.kocci.disastertracker.domain.model.reports.GeneralReports
+&nbsp;import com.kocci.disastertracker.domain.model.reports.HazeReports
+&nbsp;import com.kocci.disastertracker.domain.model.Reports
+&nbsp;import com.kocci.disastertracker.domain.model.reports.VolcanoReports
+&nbsp;import com.kocci.disastertracker.domain.model.reports.WindReports
+&nbsp;import com.kocci.disastertracker.util.helper.DateHelper
+&nbsp;import javax.inject.Inject
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;class ReportsMapper @Inject constructor(){</b>
+&nbsp;
+&nbsp;    fun convertReportApiResponseToDomain(reportsApiResponse: ReportsApiResponse): List&lt;Reports&gt; {
+<b class="nc">&nbsp;        val reportList = mutableListOf&lt;Reports&gt;()</b>
+<b class="nc">&nbsp;        reportsApiResponse.result?.objects?.output?.geometries?.let { item -&gt;</b>
+<b class="nc">&nbsp;            item.map {</b>
+<b class="nc">&nbsp;                val coordinates = Coordinates(</b>
+<b class="nc">&nbsp;                    lat = (it?.coordinates?.get(1) ?: 0.0), lng = it?.coordinates?.get(0) ?: 0.0</b>
+&nbsp;                )
+<b class="nc">&nbsp;                val title = it?.properties?.title ?: &quot;No title&quot;</b>
+<b class="nc">&nbsp;                var body = it?.properties?.text ?: &quot;No Description&quot;</b>
+<b class="nc">&nbsp;                val imgUrl = it?.properties?.imageUrl</b>
+<b class="nc">&nbsp;                val date = it?.properties?.createdAt ?: &quot;&quot;</b>
+<b class="nc">&nbsp;                val beautifyDate = DateHelper.beautifyDate(date)</b>
+<b class="nc">&nbsp;                val disasterType = it?.properties?.disasterType ?: &quot;Not Specified&quot;</b>
+&nbsp;
+<b class="nc">&nbsp;                if (body.isEmpty()) {</b>
+<b class="nc">&nbsp;                    body = &quot;No Description&quot;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                it?.properties?.reportData?.let { reportData -&gt;</b>
+<b class="nc">&nbsp;                    when (reportData) {</b>
+<b class="nc">&nbsp;                        is EarthquakeReportData -&gt; {</b>
+<b class="nc">&nbsp;                            val reports = EarthquakeReports(</b>
+<b class="nc">&nbsp;                                body,</b>
+<b class="nc">&nbsp;                                coordinates,</b>
+<b class="nc">&nbsp;                                imgUrl,</b>
+<b class="nc">&nbsp;                                title,</b>
+<b class="nc">&nbsp;                                disasterType,</b>
+<b class="nc">&nbsp;                                beautifyDate,</b>
+<b class="nc">&nbsp;                                reportData.reportType</b>
+&nbsp;                            )
+<b class="nc">&nbsp;                            reportList.add(reports)</b>
+&nbsp;                        }
+&nbsp;
+<b class="nc">&nbsp;                        is FloodReportData -&gt; {</b>
+<b class="nc">&nbsp;                            val reports = FloodReport(</b>
+<b class="nc">&nbsp;                                body,</b>
+<b class="nc">&nbsp;                                coordinates,</b>
+<b class="nc">&nbsp;                                imgUrl,</b>
+<b class="nc">&nbsp;                                title,</b>
+<b class="nc">&nbsp;                                disasterType,</b>
+<b class="nc">&nbsp;                                beautifyDate,</b>
+<b class="nc">&nbsp;                                reportData.reportType,</b>
+<b class="nc">&nbsp;                                reportData.floodDepth ?: 0</b>
+&nbsp;                            )
+<b class="nc">&nbsp;                            reportList.add(reports)</b>
+&nbsp;                        }
+&nbsp;
+<b class="nc">&nbsp;                        is FireReportData -&gt; {</b>
+<b class="nc">&nbsp;                            val reports = FireReports(</b>
+<b class="nc">&nbsp;                                body,</b>
+<b class="nc">&nbsp;                                coordinates,</b>
+<b class="nc">&nbsp;                                imgUrl,</b>
+<b class="nc">&nbsp;                                title,</b>
+<b class="nc">&nbsp;                                disasterType,</b>
+<b class="nc">&nbsp;                                beautifyDate,</b>
+<b class="nc">&nbsp;                                reportData.reportType,</b>
+<b class="nc">&nbsp;                                reportData.fireDistance ?: 0.0</b>
+&nbsp;                            )
+<b class="nc">&nbsp;                            reportList.add(reports)</b>
+&nbsp;                        }
+&nbsp;
+<b class="nc">&nbsp;                        is HazeReportData -&gt; {</b>
+<b class="nc">&nbsp;                            val reports = HazeReports(</b>
+<b class="nc">&nbsp;                                body,</b>
+<b class="nc">&nbsp;                                coordinates,</b>
+<b class="nc">&nbsp;                                imgUrl,</b>
+<b class="nc">&nbsp;                                title,</b>
+<b class="nc">&nbsp;                                disasterType,</b>
+<b class="nc">&nbsp;                                beautifyDate,</b>
+<b class="nc">&nbsp;                                reportData.reportType</b>
+&nbsp;                            )
+<b class="nc">&nbsp;                            reportList.add(reports)</b>
+&nbsp;                        }
+&nbsp;
+<b class="nc">&nbsp;                        is VolcanoReportData -&gt; {</b>
+<b class="nc">&nbsp;                            val reports = VolcanoReports(</b>
+<b class="nc">&nbsp;                                body,</b>
+<b class="nc">&nbsp;                                coordinates,</b>
+<b class="nc">&nbsp;                                imgUrl,</b>
+<b class="nc">&nbsp;                                title,</b>
+<b class="nc">&nbsp;                                disasterType,</b>
+<b class="nc">&nbsp;                                beautifyDate,</b>
+<b class="nc">&nbsp;                                reportData.reportType</b>
+&nbsp;                            )
+<b class="nc">&nbsp;                            reportList.add(reports)</b>
+&nbsp;                        }
+&nbsp;
+<b class="nc">&nbsp;                        is WindReportData -&gt; {</b>
+<b class="nc">&nbsp;                            val reports = WindReports(</b>
+<b class="nc">&nbsp;                                body,</b>
+<b class="nc">&nbsp;                                coordinates,</b>
+<b class="nc">&nbsp;                                imgUrl,</b>
+<b class="nc">&nbsp;                                title,</b>
+<b class="nc">&nbsp;                                disasterType,</b>
+<b class="nc">&nbsp;                                beautifyDate,</b>
+<b class="nc">&nbsp;                                reportData.reportType</b>
+&nbsp;                            )
+<b class="nc">&nbsp;                            reportList.add(reports)</b>
+&nbsp;                        }
+&nbsp;                    }
+<b class="nc">&nbsp;                } ?: run {</b>
+<b class="nc">&nbsp;                    val reports = GeneralReports(</b>
+<b class="nc">&nbsp;                        body,</b>
+<b class="nc">&nbsp;                        coordinates,</b>
+<b class="nc">&nbsp;                        imgUrl,</b>
+<b class="nc">&nbsp;                        title,</b>
+<b class="nc">&nbsp;                        disasterType,</b>
+<b class="nc">&nbsp;                        beautifyDate,</b>
+&nbsp;                    )
+<b class="nc">&nbsp;                    reportList.add(reports)</b>
+&nbsp;                }
+&nbsp;
+&nbsp;
+&nbsp;//            val reports = Reports(coordinates, title, body, beautifyDate, imgUrl, disasterType)
+&nbsp;//            reportList.add(reports)
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return reportList</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-08-14 13:44</div>
+</div>
+</body>
+</html>

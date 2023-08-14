@@ -5,6 +5,6 @@ import com.kocci.disastertracker.domain.reactive.Async
 import kotlinx.coroutines.flow.Flow
 
 interface ReportRepository {
-    fun getReportList(provinceName: String?, disasterType: String?): Flow<Async<List<Reports>>>
+    fun getReportList(provinceCode: String?, disasterType: String?): Flow<Async<List<Reports>>>
 
 }
