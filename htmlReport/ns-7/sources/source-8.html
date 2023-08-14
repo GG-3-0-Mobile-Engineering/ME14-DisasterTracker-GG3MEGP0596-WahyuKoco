@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > DomainModule</title>
+  <title>Coverage Report > RemoteModule_ProvideApiServiceFactory</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -21,14 +21,14 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.kocci.disastertracker.di</a>
 </div>
 
-<h1>Coverage Summary for Class: DomainModule (com.kocci.disastertracker.di)</h1>
+<h1>Coverage Summary for Class: RemoteModule_ProvideApiServiceFactory (com.kocci.disastertracker.di)</h1>
 
 <table class="coverageStats">
 <tr>
   <th class="name">Class</th>
 </tr>
 <tr>
-  <td class="name">DomainModule</td>
+  <td class="name">RemoteModule_ProvideApiServiceFactory</td>
 </tr>
 
 </table>
@@ -38,23 +38,55 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;package com.kocci.disastertracker.di
+<code class="sourceCode" id="sourceCode">&nbsp;package com.kocci.disastertracker.di;
 &nbsp;
-&nbsp;import com.kocci.disastertracker.domain.usecase.report.GetDisasterReportUseCase
-&nbsp;import com.kocci.disastertracker.domain.usecase.report.GetDisasterReportUseCaseImpl
-&nbsp;import dagger.Binds
-&nbsp;import dagger.Module
-&nbsp;import dagger.hilt.InstallIn
-&nbsp;import dagger.hilt.android.components.ViewModelComponent
+&nbsp;import com.kocci.disastertracker.data.source.remote.service.ApiService;
+&nbsp;import dagger.internal.DaggerGenerated;
+&nbsp;import dagger.internal.Factory;
+&nbsp;import dagger.internal.Preconditions;
+&nbsp;import dagger.internal.QualifierMetadata;
+&nbsp;import dagger.internal.ScopeMetadata;
+&nbsp;import javax.annotation.processing.Generated;
+&nbsp;import javax.inject.Provider;
+&nbsp;import retrofit2.Retrofit;
 &nbsp;
-&nbsp;@Module
-&nbsp;@InstallIn(ViewModelComponent::class)
-&nbsp;interface DomainModule {
+&nbsp;@ScopeMetadata(&quot;javax.inject.Singleton&quot;)
+&nbsp;@QualifierMetadata
+&nbsp;@DaggerGenerated
+&nbsp;@Generated(
+&nbsp;    value = &quot;dagger.internal.codegen.ComponentProcessor&quot;,
+&nbsp;    comments = &quot;https://dagger.dev&quot;
+&nbsp;)
+&nbsp;@SuppressWarnings({
+&nbsp;    &quot;unchecked&quot;,
+&nbsp;    &quot;rawtypes&quot;,
+&nbsp;    &quot;KotlinInternal&quot;,
+&nbsp;    &quot;KotlinInternalInJava&quot;
+&nbsp;})
+&nbsp;public final class RemoteModule_ProvideApiServiceFactory implements Factory&lt;ApiService&gt; {
+&nbsp;  private final RemoteModule module;
 &nbsp;
-&nbsp;    @Binds
-&nbsp;    fun provideGetDisasterReport(impl: GetDisasterReportUseCaseImpl): GetDisasterReportUseCase
+&nbsp;  private final Provider&lt;Retrofit&gt; retrofitProvider;
 &nbsp;
+&nbsp;  public RemoteModule_ProvideApiServiceFactory(RemoteModule module,
+&nbsp;      Provider&lt;Retrofit&gt; retrofitProvider) {
+&nbsp;    this.module = module;
+&nbsp;    this.retrofitProvider = retrofitProvider;
+&nbsp;  }
 &nbsp;
+&nbsp;  @Override
+&nbsp;  public ApiService get() {
+&nbsp;    return provideApiService(module, retrofitProvider.get());
+&nbsp;  }
+&nbsp;
+&nbsp;  public static RemoteModule_ProvideApiServiceFactory create(RemoteModule module,
+&nbsp;      Provider&lt;Retrofit&gt; retrofitProvider) {
+&nbsp;    return new RemoteModule_ProvideApiServiceFactory(module, retrofitProvider);
+&nbsp;  }
+&nbsp;
+&nbsp;  public static ApiService provideApiService(RemoteModule instance, Retrofit retrofit) {
+&nbsp;    return Preconditions.checkNotNullFromProvides(instance.provideApiService(retrofit));
+&nbsp;  }
 &nbsp;}
 </code>
 </pre>
@@ -79,7 +111,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-08-13 21:14</div>
+    <div style="float:right;">generated on 2023-08-14 13:44</div>
 </div>
 </body>
 </html>

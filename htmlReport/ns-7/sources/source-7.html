@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > PreferenceModule_ProvideDataStoreFactory</title>
+  <title>Coverage Report > RemoteModule_ProvideRetrofitFactory</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -21,14 +21,14 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.kocci.disastertracker.di</a>
 </div>
 
-<h1>Coverage Summary for Class: PreferenceModule_ProvideDataStoreFactory (com.kocci.disastertracker.di)</h1>
+<h1>Coverage Summary for Class: RemoteModule_ProvideRetrofitFactory (com.kocci.disastertracker.di)</h1>
 
 <table class="coverageStats">
 <tr>
   <th class="name">Class</th>
 </tr>
 <tr>
-  <td class="name">PreferenceModule_ProvideDataStoreFactory</td>
+  <td class="name">RemoteModule_ProvideRetrofitFactory</td>
 </tr>
 
 </table>
@@ -40,19 +40,16 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package com.kocci.disastertracker.di;
 &nbsp;
-&nbsp;import android.content.Context;
-&nbsp;import androidx.datastore.core.DataStore;
-&nbsp;import androidx.datastore.preferences.core.Preferences;
 &nbsp;import dagger.internal.DaggerGenerated;
 &nbsp;import dagger.internal.Factory;
 &nbsp;import dagger.internal.Preconditions;
 &nbsp;import dagger.internal.QualifierMetadata;
 &nbsp;import dagger.internal.ScopeMetadata;
 &nbsp;import javax.annotation.processing.Generated;
-&nbsp;import javax.inject.Provider;
+&nbsp;import retrofit2.Retrofit;
 &nbsp;
-&nbsp;@ScopeMetadata(&quot;javax.inject.Singleton&quot;)
-&nbsp;@QualifierMetadata(&quot;dagger.hilt.android.qualifiers.ApplicationContext&quot;)
+&nbsp;@ScopeMetadata
+&nbsp;@QualifierMetadata
 &nbsp;@DaggerGenerated
 &nbsp;@Generated(
 &nbsp;    value = &quot;dagger.internal.codegen.ComponentProcessor&quot;,
@@ -64,30 +61,24 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;    &quot;KotlinInternal&quot;,
 &nbsp;    &quot;KotlinInternalInJava&quot;
 &nbsp;})
-&nbsp;public final class PreferenceModule_ProvideDataStoreFactory implements Factory&lt;DataStore&lt;Preferences&gt;&gt; {
-&nbsp;  private final PreferenceModule module;
+&nbsp;public final class RemoteModule_ProvideRetrofitFactory implements Factory&lt;Retrofit&gt; {
+&nbsp;  private final RemoteModule module;
 &nbsp;
-&nbsp;  private final Provider&lt;Context&gt; appContextProvider;
-&nbsp;
-&nbsp;  public PreferenceModule_ProvideDataStoreFactory(PreferenceModule module,
-&nbsp;      Provider&lt;Context&gt; appContextProvider) {
+&nbsp;  public RemoteModule_ProvideRetrofitFactory(RemoteModule module) {
 &nbsp;    this.module = module;
-&nbsp;    this.appContextProvider = appContextProvider;
 &nbsp;  }
 &nbsp;
 &nbsp;  @Override
-&nbsp;  public DataStore&lt;Preferences&gt; get() {
-&nbsp;    return provideDataStore(module, appContextProvider.get());
+&nbsp;  public Retrofit get() {
+&nbsp;    return provideRetrofit(module);
 &nbsp;  }
 &nbsp;
-&nbsp;  public static PreferenceModule_ProvideDataStoreFactory create(PreferenceModule module,
-&nbsp;      Provider&lt;Context&gt; appContextProvider) {
-&nbsp;    return new PreferenceModule_ProvideDataStoreFactory(module, appContextProvider);
+&nbsp;  public static RemoteModule_ProvideRetrofitFactory create(RemoteModule module) {
+&nbsp;    return new RemoteModule_ProvideRetrofitFactory(module);
 &nbsp;  }
 &nbsp;
-&nbsp;  public static DataStore&lt;Preferences&gt; provideDataStore(PreferenceModule instance,
-&nbsp;      Context appContext) {
-&nbsp;    return Preconditions.checkNotNullFromProvides(instance.provideDataStore(appContext));
+&nbsp;  public static Retrofit provideRetrofit(RemoteModule instance) {
+&nbsp;    return Preconditions.checkNotNullFromProvides(instance.provideRetrofit());
 &nbsp;  }
 &nbsp;}
 </code>
@@ -113,7 +104,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-08-13 21:14</div>
+    <div style="float:right;">generated on 2023-08-14 13:44</div>
 </div>
 </body>
 </html>

@@ -209,11 +209,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;         */
 &nbsp;
 &nbsp;
-<b class="nc">&nbsp;        viewModel.darkThemePreference.observe(viewLifecycleOwner) { darkMode -&gt;</b>
+<b class="nc">&nbsp;        viewModel.darkThemeLiveData().observe(viewLifecycleOwner) { darkMode -&gt;</b>
 <b class="nc">&nbsp;            binding.switchDarkMode.isChecked = darkMode</b>
 &nbsp;        }
 &nbsp;
-<b class="nc">&nbsp;        viewModel.timePeriodPreference.observe(viewLifecycleOwner) { time -&gt;</b>
+<b class="nc">&nbsp;        viewModel.timePeriodLiveData().observe(viewLifecycleOwner) { time -&gt;</b>
 <b class="nc">&nbsp;            binding.acTvTimePeriod.setText(time.showToUi, false)</b>
 &nbsp;        }
 &nbsp;
@@ -269,7 +269,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-08-13 21:14</div>
+    <div style="float:right;">generated on 2023-08-14 13:44</div>
 </div>
 </body>
 </html>

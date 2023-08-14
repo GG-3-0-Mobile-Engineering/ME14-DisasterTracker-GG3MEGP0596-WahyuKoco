@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > PreferenceModuleKt</title>
+  <title>Coverage Report > PreferenceModule_ProvideDataStoreFactory</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -21,14 +21,14 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.kocci.disastertracker.di</a>
 </div>
 
-<h1>Coverage Summary for Class: PreferenceModuleKt (com.kocci.disastertracker.di)</h1>
+<h1>Coverage Summary for Class: PreferenceModule_ProvideDataStoreFactory (com.kocci.disastertracker.di)</h1>
 
 <table class="coverageStats">
 <tr>
   <th class="name">Class</th>
 </tr>
 <tr>
-  <td class="name">PreferenceModuleKt</td>
+  <td class="name">PreferenceModule_ProvideDataStoreFactory</td>
 </tr>
 
 </table>
@@ -38,33 +38,57 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;package com.kocci.disastertracker.di
+<code class="sourceCode" id="sourceCode">&nbsp;package com.kocci.disastertracker.di;
 &nbsp;
-&nbsp;import android.content.Context
-&nbsp;import androidx.datastore.core.DataStore
-&nbsp;import androidx.datastore.preferences.core.PreferenceDataStoreFactory
-&nbsp;import androidx.datastore.preferences.core.Preferences
-&nbsp;import androidx.datastore.preferences.preferencesDataStoreFile
-&nbsp;import dagger.Module
-&nbsp;import dagger.Provides
-&nbsp;import dagger.hilt.InstallIn
-&nbsp;import dagger.hilt.android.qualifiers.ApplicationContext
-&nbsp;import dagger.hilt.components.SingletonComponent
-&nbsp;import javax.inject.Singleton
+&nbsp;import android.content.Context;
+&nbsp;import androidx.datastore.core.DataStore;
+&nbsp;import androidx.datastore.preferences.core.Preferences;
+&nbsp;import dagger.internal.DaggerGenerated;
+&nbsp;import dagger.internal.Factory;
+&nbsp;import dagger.internal.Preconditions;
+&nbsp;import dagger.internal.QualifierMetadata;
+&nbsp;import dagger.internal.ScopeMetadata;
+&nbsp;import javax.annotation.processing.Generated;
+&nbsp;import javax.inject.Provider;
 &nbsp;
-&nbsp;private const val USER_PREFERENCES = &quot;user_preferences&quot;
+&nbsp;@ScopeMetadata(&quot;javax.inject.Singleton&quot;)
+&nbsp;@QualifierMetadata(&quot;dagger.hilt.android.qualifiers.ApplicationContext&quot;)
+&nbsp;@DaggerGenerated
+&nbsp;@Generated(
+&nbsp;    value = &quot;dagger.internal.codegen.ComponentProcessor&quot;,
+&nbsp;    comments = &quot;https://dagger.dev&quot;
+&nbsp;)
+&nbsp;@SuppressWarnings({
+&nbsp;    &quot;unchecked&quot;,
+&nbsp;    &quot;rawtypes&quot;,
+&nbsp;    &quot;KotlinInternal&quot;,
+&nbsp;    &quot;KotlinInternalInJava&quot;
+&nbsp;})
+&nbsp;public final class PreferenceModule_ProvideDataStoreFactory implements Factory&lt;DataStore&lt;Preferences&gt;&gt; {
+&nbsp;  private final PreferenceModule module;
 &nbsp;
-&nbsp;@Module
-&nbsp;@InstallIn(SingletonComponent::class)
-&nbsp;class PreferenceModule {
+&nbsp;  private final Provider&lt;Context&gt; appContextProvider;
 &nbsp;
-&nbsp;    @Singleton
-&nbsp;    @Provides
-&nbsp;    fun provideDataStore(@ApplicationContext appContext: Context): DataStore&lt;Preferences&gt; {
-&nbsp;        return PreferenceDataStoreFactory.create {
-&nbsp;            appContext.preferencesDataStoreFile(USER_PREFERENCES)
-&nbsp;        }
-&nbsp;    }
+&nbsp;  public PreferenceModule_ProvideDataStoreFactory(PreferenceModule module,
+&nbsp;      Provider&lt;Context&gt; appContextProvider) {
+&nbsp;    this.module = module;
+&nbsp;    this.appContextProvider = appContextProvider;
+&nbsp;  }
+&nbsp;
+&nbsp;  @Override
+&nbsp;  public DataStore&lt;Preferences&gt; get() {
+&nbsp;    return provideDataStore(module, appContextProvider.get());
+&nbsp;  }
+&nbsp;
+&nbsp;  public static PreferenceModule_ProvideDataStoreFactory create(PreferenceModule module,
+&nbsp;      Provider&lt;Context&gt; appContextProvider) {
+&nbsp;    return new PreferenceModule_ProvideDataStoreFactory(module, appContextProvider);
+&nbsp;  }
+&nbsp;
+&nbsp;  public static DataStore&lt;Preferences&gt; provideDataStore(PreferenceModule instance,
+&nbsp;      Context appContext) {
+&nbsp;    return Preconditions.checkNotNullFromProvides(instance.provideDataStore(appContext));
+&nbsp;  }
 &nbsp;}
 </code>
 </pre>
@@ -89,7 +113,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-08-13 21:14</div>
+    <div style="float:right;">generated on 2023-08-14 13:44</div>
 </div>
 </body>
 </html>

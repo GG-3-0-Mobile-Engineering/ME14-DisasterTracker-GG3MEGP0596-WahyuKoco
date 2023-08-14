@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > RemoteModule_ProvideRetrofitFactory</title>
+  <title>Coverage Report > PreferenceModuleKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -21,14 +21,14 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.kocci.disastertracker.di</a>
 </div>
 
-<h1>Coverage Summary for Class: RemoteModule_ProvideRetrofitFactory (com.kocci.disastertracker.di)</h1>
+<h1>Coverage Summary for Class: PreferenceModuleKt (com.kocci.disastertracker.di)</h1>
 
 <table class="coverageStats">
 <tr>
   <th class="name">Class</th>
 </tr>
 <tr>
-  <td class="name">RemoteModule_ProvideRetrofitFactory</td>
+  <td class="name">PreferenceModuleKt</td>
 </tr>
 
 </table>
@@ -38,48 +38,33 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;package com.kocci.disastertracker.di;
+<code class="sourceCode" id="sourceCode">&nbsp;package com.kocci.disastertracker.di
 &nbsp;
-&nbsp;import dagger.internal.DaggerGenerated;
-&nbsp;import dagger.internal.Factory;
-&nbsp;import dagger.internal.Preconditions;
-&nbsp;import dagger.internal.QualifierMetadata;
-&nbsp;import dagger.internal.ScopeMetadata;
-&nbsp;import javax.annotation.processing.Generated;
-&nbsp;import retrofit2.Retrofit;
+&nbsp;import android.content.Context
+&nbsp;import androidx.datastore.core.DataStore
+&nbsp;import androidx.datastore.preferences.core.PreferenceDataStoreFactory
+&nbsp;import androidx.datastore.preferences.core.Preferences
+&nbsp;import androidx.datastore.preferences.preferencesDataStoreFile
+&nbsp;import dagger.Module
+&nbsp;import dagger.Provides
+&nbsp;import dagger.hilt.InstallIn
+&nbsp;import dagger.hilt.android.qualifiers.ApplicationContext
+&nbsp;import dagger.hilt.components.SingletonComponent
+&nbsp;import javax.inject.Singleton
 &nbsp;
-&nbsp;@ScopeMetadata
-&nbsp;@QualifierMetadata
-&nbsp;@DaggerGenerated
-&nbsp;@Generated(
-&nbsp;    value = &quot;dagger.internal.codegen.ComponentProcessor&quot;,
-&nbsp;    comments = &quot;https://dagger.dev&quot;
-&nbsp;)
-&nbsp;@SuppressWarnings({
-&nbsp;    &quot;unchecked&quot;,
-&nbsp;    &quot;rawtypes&quot;,
-&nbsp;    &quot;KotlinInternal&quot;,
-&nbsp;    &quot;KotlinInternalInJava&quot;
-&nbsp;})
-&nbsp;public final class RemoteModule_ProvideRetrofitFactory implements Factory&lt;Retrofit&gt; {
-&nbsp;  private final RemoteModule module;
+&nbsp;private const val USER_PREFERENCES = &quot;user_preferences&quot;
 &nbsp;
-&nbsp;  public RemoteModule_ProvideRetrofitFactory(RemoteModule module) {
-&nbsp;    this.module = module;
-&nbsp;  }
+&nbsp;@Module
+&nbsp;@InstallIn(SingletonComponent::class)
+&nbsp;class PreferenceModule {
 &nbsp;
-&nbsp;  @Override
-&nbsp;  public Retrofit get() {
-&nbsp;    return provideRetrofit(module);
-&nbsp;  }
-&nbsp;
-&nbsp;  public static RemoteModule_ProvideRetrofitFactory create(RemoteModule module) {
-&nbsp;    return new RemoteModule_ProvideRetrofitFactory(module);
-&nbsp;  }
-&nbsp;
-&nbsp;  public static Retrofit provideRetrofit(RemoteModule instance) {
-&nbsp;    return Preconditions.checkNotNullFromProvides(instance.provideRetrofit());
-&nbsp;  }
+&nbsp;    @Singleton
+&nbsp;    @Provides
+&nbsp;    fun provideDataStore(@ApplicationContext appContext: Context): DataStore&lt;Preferences&gt; {
+&nbsp;        return PreferenceDataStoreFactory.create {
+&nbsp;            appContext.preferencesDataStoreFile(USER_PREFERENCES)
+&nbsp;        }
+&nbsp;    }
 &nbsp;}
 </code>
 </pre>
@@ -104,7 +89,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-08-13 21:14</div>
+    <div style="float:right;">generated on 2023-08-14 13:44</div>
 </div>
 </body>
 </html>

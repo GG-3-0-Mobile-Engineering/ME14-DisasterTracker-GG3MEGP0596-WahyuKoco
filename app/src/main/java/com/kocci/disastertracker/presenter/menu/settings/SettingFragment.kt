@@ -30,11 +30,11 @@ class SettingFragment : Fragment() {
          */
 
 
-        viewModel.darkThemePreference.observe(viewLifecycleOwner) { darkMode ->
+        viewModel.darkThemeLiveData().observe(viewLifecycleOwner) { darkMode ->
             binding.switchDarkMode.isChecked = darkMode
         }
 
-        viewModel.timePeriodPreference.observe(viewLifecycleOwner) { time ->
+        viewModel.timePeriodLiveData().observe(viewLifecycleOwner) { time ->
             binding.acTvTimePeriod.setText(time.showToUi, false)
         }
 
