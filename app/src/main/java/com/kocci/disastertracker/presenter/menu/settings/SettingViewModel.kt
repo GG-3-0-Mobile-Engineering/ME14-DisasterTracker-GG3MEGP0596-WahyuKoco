@@ -1,25 +1,35 @@
 package com.kocci.disastertracker.presenter.menu.settings
 
 import androidx.lifecycle.ViewModel
-import com.kocci.disastertracker.domain.usecase.settings.DarkThemeUseCase
-import com.kocci.disastertracker.domain.usecase.settings.ReportTimePeriodUseCase
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
+import com.kocci.disastertracker.data.source.local.preferences.SettingPreferences
+import com.kocci.disastertracker.util.helper.ReportPeriodHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class SettingViewModel @Inject constructor(
-    private val useCase: DarkThemeUseCase,
-    private val timePeriodUseCase: ReportTimePeriodUseCase
+    private val settingPreferences: SettingPreferences
 ) : ViewModel() {
 
-    val userTimePreference = timePeriodUseCase.showTimePeriod()
+    fun darkThemeLiveData() = settingPreferences.darkThemePreference.asLiveData()
+    fun timePeriodLiveData() =
+        settingPreferences.reportPeriodPreference.map {
+            ReportPeriodHelper.convertToEnum(it)
+        }.asLiveData()
 
-    fun enableDarkTheme() = useCase.enableDarkTheme()
-    fun disableDarkTheme() = useCase.disableDarkTheme()
-    val isDarkModeEnabled = useCase.isDarkThemeEnabled()
-
-    fun showAvailableTime() = timePeriodUseCase.showAvailableTimePeriod()
-    fun setTimePeriod(period: String) {
-        timePeriodUseCase.setTimePeriod(period)
+    fun updateTimePeriod(timePeriod: String) = viewModelScope.launch {
+        val time = ReportPeriodHelper.convertToEnum(timePeriod).periodInSec
+        settingPreferences.setReportPeriod(time)
     }
+
+    fun updateDarkTheme(state: Boolean) = viewModelScope.launch {
+        settingPreferences.setDarkThemeState(state)
+    }
+
+    fun getAvailableTime() = ReportPeriodHelper.getAvailableTimePeriod()
 }
+

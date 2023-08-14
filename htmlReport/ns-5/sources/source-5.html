@@ -1,0 +1,205 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > HazeReportData</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.kocci.disastertracker.data.source.remote.response</a>
+</div>
+
+<h1>Coverage Summary for Class: HazeReportData (com.kocci.disastertracker.data.source.remote.response)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">HazeReportData</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.kocci.disastertracker.data.source.remote.response
+&nbsp;
+&nbsp;import com.google.gson.JsonDeserializationContext
+&nbsp;import com.google.gson.JsonDeserializer
+&nbsp;import com.google.gson.JsonElement
+&nbsp;import com.google.gson.annotations.SerializedName
+&nbsp;import com.kocci.disastertracker.util.helper.MyLogger
+&nbsp;import java.lang.IllegalArgumentException
+&nbsp;import java.lang.reflect.Type
+&nbsp;
+&nbsp;/**
+&nbsp; * This api response was dynamic.
+&nbsp; * So we need to get it manually per disaster.
+&nbsp; */
+&nbsp;class ReportDataDeserializer : JsonDeserializer&lt;ReportData&gt; {
+&nbsp;    override fun deserialize(
+&nbsp;        json: JsonElement?,
+&nbsp;        typeOfT: Type?,
+&nbsp;        context: JsonDeserializationContext?
+&nbsp;    ):   ReportData{
+&nbsp;        json?.let {
+&nbsp;            MyLogger.e(&quot;Breakpoint 1.&quot;)
+&nbsp;            val jsonObject = it.asJsonObject
+&nbsp;            MyLogger.e(&quot;Breakpoint 2 : $jsonObject.&quot;)
+&nbsp;            val type = jsonObject[&quot;report_type&quot;].asString
+&nbsp;            MyLogger.e(&quot;Breakpoint 3 : $type.&quot;)
+&nbsp;
+&nbsp;
+&nbsp;            return when (type) {
+&nbsp;                &quot;flood&quot; -&gt; {
+&nbsp;                    val floodDepth = jsonObject[&quot;flood_depth&quot;].asInt
+&nbsp;                    FloodReportData(type, floodDepth)
+&nbsp;                }
+&nbsp;
+&nbsp;                &quot;fire&quot; -&gt; {
+&nbsp;                    val fireDistance = jsonObject[&quot;fireDistance&quot;].asDouble
+&nbsp;                    FireReportData(type, fireDistance)
+&nbsp;                }
+&nbsp;
+&nbsp;                &quot;earthquake&quot; -&gt; {
+&nbsp;                    EarthquakeReportData(type)
+&nbsp;                }
+&nbsp;
+&nbsp;                &quot;haze&quot; -&gt; {
+&nbsp;                    HazeReportData(type)
+&nbsp;                }
+&nbsp;
+&nbsp;                &quot;wind&quot; -&gt; {
+&nbsp;                    WindReportData(type)
+&nbsp;                }
+&nbsp;
+&nbsp;                &quot;volcano&quot; -&gt; {
+&nbsp;                    VolcanoReportData(type)
+&nbsp;                }
+&nbsp;
+&nbsp;                else -&gt; {
+&nbsp;                    // Handle any other types or return a default object if needed
+&nbsp;                    return EarthquakeReportData(&quot;earthquake&quot;)
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;        // Return a default object in case of null JSON or any other errors
+&nbsp;        throw IllegalArgumentException(&quot;Invalid JSON&quot;)
+&nbsp;    }
+&nbsp;}
+&nbsp;
+&nbsp;
+&nbsp;sealed class ReportData
+&nbsp;
+&nbsp;data class FloodReportData(
+&nbsp;    @field:SerializedName(&quot;report_type&quot;)
+&nbsp;    val reportType: String,
+&nbsp;    @field:SerializedName(&quot;flood_depth&quot;)
+&nbsp;    val floodDepth: Int?
+&nbsp;) : ReportData()
+&nbsp;
+&nbsp;data class FireReportData(
+&nbsp;    @field:SerializedName(&quot;report_type&quot;)
+&nbsp;    val reportType: String,
+&nbsp;    @field:SerializedName(&quot;fireDistance&quot;)
+&nbsp;    val fireDistance: Double?
+&nbsp;) : ReportData()
+&nbsp;
+&nbsp;data class EarthquakeReportData(
+&nbsp;    @field:SerializedName(&quot;report_type&quot;)
+&nbsp;    val reportType: String,
+&nbsp;) : ReportData()
+&nbsp;
+&nbsp;data class WindReportData(
+&nbsp;    @field:SerializedName(&quot;report_type&quot;)
+&nbsp;    val reportType: String,
+&nbsp;) : ReportData()
+&nbsp;
+&nbsp;data class HazeReportData(
+<b class="nc">&nbsp;    @field:SerializedName(&quot;report_type&quot;)</b>
+<b class="nc">&nbsp;    val reportType: String,</b>
+<b class="nc">&nbsp;) : ReportData()</b>
+&nbsp;
+&nbsp;data class VolcanoReportData(
+&nbsp;    @field:SerializedName(&quot;report_type&quot;)
+&nbsp;    val reportType: String,
+&nbsp;) : ReportData()
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-08-14 13:44</div>
+</div>
+</body>
+</html>
